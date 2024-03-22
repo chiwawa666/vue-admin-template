@@ -1,30 +1,60 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+  <div>
+    <img src="@/assets/map.png" alt="" @click="click" class="imgFull" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import screenfull from "screenfull";
 
 export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
-}
+  name: "BigScreen",
+  data() {
+    return {
+      isscreenfull: true,
+      // screenfull: screenfull
+    };
+  },
+  created() {
+    // console.log("asdasd sad");
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    click() {
+      if (!screenfull.enabled) {
+        this.$message({
+          message: "浏览器不支持",
+          type: "warning",
+        });
+        return false;
+      }
+      screenfull.toggle();
+      this.$store.dispatch("full/toggleFull");
+      // console.log(this.$store.full);
+    },
+    init() {
+      if (screenfull.enabled) {
+        // screenfull.on("change", this.change);
+        screenfull.toggle();
+        // this.click();
+      }
+    },
+    change() {
+      this.isFullscreen = screenfull.isFullscreen;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
+div {
+  overflow: hidden;
+}
+.imgFull {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 </style>

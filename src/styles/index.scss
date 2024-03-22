@@ -23,6 +23,7 @@ html {
 
 #app {
   height: 100%;
+  overflow: hidden;
 }
 
 *,
@@ -62,4 +63,18 @@ div:focus {
 // main-container global css
 .app-container {
   padding: 20px;
+}
+.el-table .cell{
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+.filter-container{
+  padding-bottom: 10px;
+}
+.filter-item{
+  margin-right: 5px;
+}
+.float-right-button{
+  float: right;
 }
